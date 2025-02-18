@@ -1,8 +1,10 @@
 package models
 
-type StandardModel struct {
-	ID        string  `json:"id"` // ID único do paciente
+import "time"
 
-	CreatedAt string `json:"created_at"` // Data de criação do registro
-	UpdatedAt string `json:"updated_at"` // Data da última atualização do registro
+// StandardModel contém campos comuns para todas as entidades.
+type StandardModel struct {
+	ID        string    `gorm:"primaryKey" json:"id"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
