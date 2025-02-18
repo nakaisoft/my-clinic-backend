@@ -2,7 +2,9 @@ package repository
 
 import (
 	"context"
+	"time"
 
+	"github.com/google/uuid"
 	"github.com/nakaisoft/my-clinic-backend/internal/models"
 	"github.com/nakaisoft/my-clinic-backend/internal/repository"
 	"gorm.io/gorm"
@@ -20,6 +22,15 @@ func NewPatientRepository(db *gorm.DB) repository.PatientRepository {
 
 // Insert adiciona um novo paciente, incluindo endereços.
 func (r *patientRepositoryImpl) Insert(ctx context.Context, patient *models.PatientModel) error {
+	if patient.ID == "" {
+		patient.ID = uuid.New().String()
+	}
+	// add createdat 
+	patient.CreatedAt = time.Now()
+	// add updatedat
+	patient.UpdatedAt = time.Now()
+
+	// insert in patienttable
 	return r.db.WithContext(ctx).Create(patient).Error
 }
 

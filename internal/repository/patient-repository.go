@@ -2,7 +2,6 @@ package repository
 
 import (
 	"context"
-
 	"github.com/nakaisoft/my-clinic-backend/internal/models"
 
 )
